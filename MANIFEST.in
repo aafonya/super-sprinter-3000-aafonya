@@ -1,0 +1,4 @@
+graft flaskr/templates
+graft flaskr/static
+include flaskr/connectdatabase.py
+include flaskr/models.py

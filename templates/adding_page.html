@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Super Sprinter 3000</title>
+</head>
+<body style="font-family:Georgia, 'Times New Roman', Times, serif;color:blue">
+<h1>User Story Manager - {{header}}</h1>
+<form action="/story/{{user_stories.id}}" method="POST">
+    <label for="title">Story Title</label><textarea name='title' id="title" rows="1" cols="80" required>{{user_stories.title}}</textarea><br>
+    <label for="text">User Story</label><textarea name='text' id="text" rows="6" cols="80" required>{{user_stories.text}}</textarea><br>
+    <label for="criteria">Acceptance Criteria</label><textarea name="criteria" id="criteria" rows="6" cols="80" required>{{user_stories.criteria}}</textarea><br>
+    <label for="business_value">Business Value</label><input type="number" name="business_value" id="business_value" min="100"
+        max="1500" step="100" size="10" value="{{user_stories.business_value}}"><br>
+    <label for="estimation">Estimation (h)</label><input type="number" name="estimation" id="estimation" min="0.5" max="40"
+        step="0.5" size="10" value="{{user_stories.estimation}}"><br>
+    <label for="status">Status</label>
+    <select name="status" id="status" required>"{{user_stories.status}}">
+<option value="planning">Planning</option>
+<option value="to_do">To Do</option>
+<option value="in_progress">In Progress</option>
+<option value="review">Review</option>
+<option value="complete">Complete</option></select><br>
+    <button type='submit'>{{button}}</button></form>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Super Sprinter 3000</title>
+</head>
+<body style="font-family:Cambria, Cochin, Georgia, Times, Times New Roman, serif;color:blue">
+<h1>Super Sprinter 3000</h1>
+{% if stories.count()!=0 %}
+<table>
+    <thead>
+        <tr>
+            {% for field in stories[0].__dict__['_data'] %}
+            <th>{{field}}</th>
+            {%endfor%}</tr>
+    </thead>
+    <tbody>
+        {% for story in stories %}
+        <tr>
+            <td>{{story.id}}</td>
+            <td>{{story.title}}</td>
+            <td>{{story.text}}</td>
+            <td>{{story.criteria}}</td>
+            <td>{{story.value}}</td>
+            <td>{{story.estimation}}</td>
+            <td>{{story.status}}</td>
+        </tr>
+        {%endfor%}</tbody>
+</table>
+{%endif%}
+<form action="{{url_for('form')}}">
+    <input type="submit" value="Create" /></form>
+</body>
+
+</html>
