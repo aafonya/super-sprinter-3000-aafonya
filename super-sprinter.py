@@ -38,56 +38,7 @@ def close_db(error):
         g.postgre_db.close()
 
 
-@app.route('/')
-@app.route('/list')
-def show_stories():
-    user_stories = User_stories.select().order_by(User_stories.id)
-    return render_template('list.html', stories=stories)
 
-
-@app.route('/form', methods=['GET', 'POST'])
-def form():
-    story = []
-    return render_template('form.html', story=story, header='Create story', button='Create')
-
-
-@app.route('/story/', methods=['POST'])
-def record_story():
-    new_record = User_stories.create(title=request.form['title'],
-                                     text=request.form['text'],
-                                     criteria=request.form['criteria'],
-                                     business_value=request.form[
-                                         'business_value'],
-                                     estimation=request.form['estimation'],
-                                     status=request.form['status'])
-    new_record.save()
-    return redirect(url_for('show_stories'))
-
-
-@app.route('/story/<story_id>', methods=['GET'])
-def edit(story_id):
-    story = User_stories.get(User_stories.id == story_id)
-    return render_template("form.html", story=story, header="Edit story", button="Update")
-
-
-@app.route('/story/', methods=['POST'])
-def edit_story(story_id):
-    edit_record = User_stories.update(title=request.form['title'],
-                                      text=request.form['text'],
-                                      criteria=request.form['criteria'],
-                                      business_value=request.form[
-                                          'business_value'],
-                                      estimation=request.form['estimation'],
-                                      status=request.form['status']).where(Story.id == story_id)
-    edit_record.save()
-    return redirect(url_for('show_stories'))
-
-
-@app.route('/delete/<story_id>', methods=['POST'])
-def delete_story(story_id):
-    story = User_stories.select().where(User_stories.id == story_id).get()
-    User_stories.delete_instance()
-    return redirect(url_for('show_stories'))
 
 if __name__ == '__main__':
     init_db()
